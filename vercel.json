@@ -3,10 +3,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "public",
   "env": {
-    "MONGODB_URI": "@mongodb_uri",
-    "ADMIN_EMAIL": "@admin_email",
-    "ADMIN_PASSWORD": "@admin_password",
-    "JWT_SECRET": "@jwt_secret"
+    "MONGODB_URI": "mongodb+srv://balabaskaran0107_db_user:CNm0gzEtvn9RlAku@cybersafe.httvgrv.mongodb.net/cybersafe?retryWrites=true&w=majority",
+    "ADMIN_EMAIL": "admin@cybersafe.com",
+    "ADMIN_PASSWORD": "password",
+    "JWT_SECRET": "cybersafe_jwt_secret_key_2024"
   },
   "functions": {
     "api/track.js": {
