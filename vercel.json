@@ -1,18 +1,70 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "env": {
+    "MONGODB_URI": "@mongodb_uri",
+    "ADMIN_EMAIL": "@admin_email",
+    "ADMIN_PASSWORD": "@admin_password",
+    "JWT_SECRET": "@jwt_secret"
+  },
+  "functions": {
+    "api/track.js": {
+      "memory": 1024,
+      "maxDuration": 30
+    },
+    "api/stats.js": {
+      "memory": 512,
+      "maxDuration": 30
+    },
+    "api/admin.js": {
+      "memory": 1024,
+      "maxDuration": 30
     }
-  ],
+  },
   "routes": [
+    {
+      "src": "/api/track",
+      "dest": "/api/track.js",
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "src": "/api/stats",
+      "dest": "/api/stats.js",
+      "methods": ["GET", "OPTIONS"]
+    },
+    {
+      "src": "/api/admin",
+      "dest": "/api/admin.js",
+      "methods": ["GET", "POST", "OPTIONS"]
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin.html"
+    },
     {
       "src": "/(.*)",
       "dest": "/$1"
     }
   ],
   "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [

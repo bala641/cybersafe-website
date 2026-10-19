@@ -1,0 +1,27 @@
+{
+  "name": "cybersafe-website",
+  "version": "1.0.0",
+  "description": "CyberSafe Network Monitoring - Professional Marketing Website",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "dev": "python -m http.server 3000",
+    "start": "npm run dev"
+  },
+  "keywords": [
+    "network-monitoring",
+    "packet-capture",
+    "threat-detection",
+    "cybersecurity"
+  ],
+  "author": "CyberSafe Team",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^6.0.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "18.x"
+  }
+}

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSafe Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        .admin-container {
+            min-height: 100vh;
+            background-color: var(--dark);
+        }
+
+        .admin-header {
+            background-color: var(--dark-secondary);
+            border-bottom: 2px solid var(--primary);
+            padding: 2rem 0;
+        }
+
+        .admin-header h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .admin-nav button {
+            padding: 8px 16px;
+            border: none;
+            background-color: var(--dark-tertiary);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-nav button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .admin-nav button:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .admin-content {
+            padding: 2rem 0;
+        }
+
+        .dashboard-section {
+            display: none;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background-color: var(--dark-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-card .change {
+            font-size: 0.85rem;
+            color: var(--success);
+            margin-top: 0.5rem;
+        }
+
+        .table-container {
+            background-color: var(--dark-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: var(--dark-tertiary);
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background-color: var(--dark-tertiary);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success);
+        }
+
+        .status-inactive {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: var(--danger);
+        }
+
+        .event-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background-color: var(--dark-tertiary);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background-color: var(--dark-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-primary);
+        }
+
+        .search-box button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .chart-container {
+            background-color: var(--dark-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .export-btn {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .export-btn button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--dark-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn button:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .auth-section {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .auth-form {
+            background-color: var(--dark-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .auth-form h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-primary);
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            background-color: var(--dark-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .pagination button.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            background-color: rgba(76, 175, 80, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Header -->
+        <div class="admin-header">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1>CyberSafe Admin Dashboard</h1>
+                        <p style="color: var(--text-secondary);">Monitor downloads, users, and system metrics</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="dashboard.logout()">Logout</button>
+                </div>
+                <div class="admin-nav">
+                    <button class="active" onclick="dashboard.switchTab(this)">Overview</button>
+                    <button onclick="dashboard.switchTab(this)">Active Users</button>
+                    <button onclick="dashboard.switchTab(this)">Download History</button>
+                    <button onclick="dashboard.switchTab(this)">Events</button>
+                    <button onclick="dashboard.switchTab(this)">Admin Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Content -->
+        <div class="admin-content">
+            <div class="container">
+
+                <!-- Overview Tab -->
+                <div id="overview" class="dashboard-section active">
+                    <h2 style="margin-bottom: 2rem;">Dashboard Overview</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Total Downloads</h3>
+                            <div class="value" id="totalDownloads">2,458</div>
+                            <div class="change">↑ 12% from last week</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Active Users</h3>
+                            <div class="value" id="activeUsers">1,247</div>
+                            <div class="change">Currently online</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Page Views</h3>
+                            <div class="value" id="pageViews">8,932</div>
+                            <div class="change">↑ 8% from last week</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Avg. Session Duration</h3>
+                            <div class="value" id="avgSession">3m 24s</div>
+                            <div class="change">↑ 2% from last week</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3 style="margin-bottom: 1.5rem;">Downloads Over Time</h3>
+                        <canvas id="downloadsChart" style="max-height: 300px;"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3 style="margin-bottom: 1.5rem;">User Activity</h3>
+                        <canvas id="activityChart" style="max-height: 300px;"></canvas>
+                    </div>
+
+                    <div class="export-btn">
+                        <button onclick="dashboard.exportDashboard('pdf')">📊 Export as PDF</button>
+                        <button onclick="dashboard.exportDashboard('csv')">📈 Export as CSV</button>
+                        <button onclick="dashboard.exportDashboard('json')">📋 Export as JSON</button>
+                    </div>
+                </div>
+
+                <!-- Active Users Tab -->
+                <div id="users" class="dashboard-section">
+                    <h2 style="margin-bottom: 2rem;">Active Users</h2>
+                    
+                    <div class="search-box">
+                        <input type="text" id="userSearch" placeholder="Search by User ID or Platform...">
+                        <button onclick="dashboard.performSearch(this)">Search</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Last Seen</th>
+                                    <th>Platform</th>
+                                    <th>Sessions</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable">
+                                <tr>
+                                    <td>user_abc123_1697</td>
+                                    <td>2 minutes ago</td>
+                                    <td>Windows 11 (x64)</td>
+                                    <td>5</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>user_def456_1698</td>
+                                    <td>15 minutes ago</td>
+                                    <td>Windows 10 (x64)</td>
+                                    <td>12</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>user_ghi789_1699</td>
+                                    <td>2 hours ago</td>
+                                    <td>Windows 11 (x64)</td>
+                                    <td>3</td>
+                                    <td><span class="status-badge status-inactive">Inactive</span></td>
+                                </tr>
+                                <tr>
+                                    <td>user_jkl012_1700</td>
+                                    <td>5 minutes ago</td>
+                                    <td>Windows Server 2022</td>
+                                    <td>8</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>user_mno345_1701</td>
+                                    <td>1 day ago</td>
+                                    <td>Windows 10 (x86)</td>
+                                    <td>2</td>
+                                    <td><span class="status-badge status-inactive">Inactive</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>Next →</button>
+                    </div>
+                </div>
+
+                <!-- Downloads Tab -->
+                <div id="downloads" class="dashboard-section">
+                    <h2 style="margin-bottom: 2rem;">Download History</h2>
+                    
+                    <div class="search-box">
+                        <input type="text" id="downloadSearch" placeholder="Search by User ID...">
+                        <button onclick="dashboard.performSearch(this)">Search</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Download ID</th>
+                                    <th>User ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Platform</th>
+                                    <th>Version</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="downloadsTable">
+                                <tr>
+                                    <td>#DL-2024-001284</td>
+                                    <td>user_abc123_1697</td>
+                                    <td>2024-10-19 14:32:15</td>
+                                    <td>Windows 11 (x64)</td>
+                                    <td>2.5.1</td>
+                                    <td><span class="status-badge status-active">Complete</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#DL-2024-001283</td>
+                                    <td>user_def456_1698</td>
+                                    <td>2024-10-19 14:15:42</td>
+                                    <td>Windows 10 (x64)</td>
+                                    <td>2.5.1</td>
+                                    <td><span class="status-badge status-active">Complete</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#DL-2024-001282</td>
+                                    <td>user_jkl012_1700</td>
+                                    <td>2024-10-19 13:48:09</td>
+                                    <td>Windows Server 2022</td>
+                                    <td>2.5.0</td>
+                                    <td><span class="status-badge status-active">Complete</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#DL-2024-001281</td>
+                                    <td>user_pqr678_1702</td>
+                                    <td>2024-10-19 13:20:33</td>
+                                    <td>Windows 11 (x64)</td>
+                                    <td>2.5.1</td>
+                                    <td><span class="status-badge status-active">Complete</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#DL-2024-001280</td>
+                                    <td>user_stu901_1703</td>
+                                    <td>2024-10-19 12:55:22</td>
+                                    <td>Windows 10 (x86)</td>
+                                    <td>2.4.8</td>
+                                    <td><span class="status-badge status-active">Complete</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>Next →</button>
+                    </div>
+                </div>
+
+                <!-- Events Tab -->
+                <div id="events" class="dashboard-section">
+                    <h2 style="margin-bottom: 2rem;">User Events</h2>
+                    
+                    <div class="search-box">
+                        <input type="text" id="eventSearch" placeholder="Search by event type...">
+                        <button onclick="dashboard.performSearch(this)">Search</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>User ID</th>
+                                    <th>Event Type</th>
+                                    <th>Details</th>
+                                    <th>IP/Platform</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventsTable">
+                                <tr>
+                                    <td>2024-10-19 14:32:15</td>
+                                    <td>user_abc123_1697</td>
+                                    <td><span class="event-type">download</span></td>
+                                    <td>Downloaded v2.5.1</td>
+                                    <td>192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10-19 14:15:42</td>
+                                    <td>user_def456_1698</td>
+                                    <td><span class="event-type">page_view</span></td>
+                                    <td>Viewed features page</td>
+                                    <td>Windows 10</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10-19 13:48:09</td>
+                                    <td>user_jkl012_1700</td>
+                                    <td><span class="event-type">feature_selection</span></td>
+                                    <td>Selected: Packet Capture</td>
+                                    <td>Windows Server 2022</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10-19 13:20:33</td>
+                                    <td>user_pqr678_1702</td>
+                                    <td><span class="event-type">user_active</span></td>
+                                    <td>Session still active</td>
+                                    <td>192.168.1.101</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10-19 12:55:22</td>
+                                    <td>user_stu901_1703</td>
+                                    <td><span class="event-type">session_end</span></td>
+                                    <td>Session ended</td>
+                                    <td>Windows 10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>Next →</button>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings" class="dashboard-section">
+                    <h2 style="margin-bottom: 2rem;">Admin Settings</h2>
+                    
+                    <div style="max-width: 600px;">
+                        <div class="stat-card" style="margin-bottom: 2rem;">
+                            <h3>API Configuration</h3>
+                            <form style="margin-top: 1.5rem;">
+                                <div class="form-group">
+                                    <label>API Key</label>
+                                    <input type="password" value="sk_live_4eC39HqLyjWDarht..." readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Webhook URL</label>
+                                    <input type="text" value="https://cybersafe.local/webhooks/events" readonly>
+                                </div>
+                                <button type="button" class="btn btn-secondary" onclick="dashboard.regenerateApiKey()">Regenerate API Key</button>
+                            </form>
+                        </div>
+
+                        <div class="stat-card" style="margin-bottom: 2rem;">
+                            <h3>Export Data</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Export all collected analytics and user data</p>
+                            <div style="display: flex; gap: 1rem;">
+                                <button class="btn btn-secondary" onclick="dashboard.exportAllData('csv')">Export as CSV</button>
+                                <button class="btn btn-secondary" onclick="dashboard.exportAllData('json')">Export as JSON</button>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>System Status</h3>
+                            <div style="margin-top: 1.5rem;">
+                                <p><strong>Database:</strong> <span style="color: var(--success);">✓ Connected</span></p>
+                                <p><strong>API Server:</strong> <span style="color: var(--success);">✓ Running</span></p>
+                                <p><strong>Last Backup:</strong> <span style="color: var(--text-secondary);">2024-10-19 02:00 UTC</span></p>
+                                <p><strong>Total Users:</strong> <span style="color: var(--primary);">4,582</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
