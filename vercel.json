@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": "vite",
+  "env": {
+    "VITE_API_URL": "@cybersafe_api_url",
+    "VITE_FIREBASE_CONFIG": "@cybersafe_firebase_config"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "destination": "frontend/dist/index.html"
+    }
+  ],
+  "regions": ["iad1"]
+}
