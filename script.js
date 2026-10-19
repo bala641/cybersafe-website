@@ -90,7 +90,10 @@ function exportTrackingData() {
 
 // Scroll to download section
 function scrollToDownload() {
-    document.getElementById('monitor').scrollIntoView({ behavior: 'smooth' });
+    const downloadSection = document.querySelector('.download-section');
+    if (downloadSection) {
+        downloadSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // Initialize on page load
@@ -161,3 +164,36 @@ window.addEventListener('beforeunload', function() {
         sessionDuration: performance.timing.loadEventEnd - performance.timing.navigationStart
     });
 });
+
+
+// Download CyberSafe installer
+function downloadCyberSafe() {
+    const userId = localStorage.getItem('cybersafe_user_id') || 'anonymous';
+    
+    trackEvent({
+        eventType: 'download_initiated',
+        userId: userId,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent
+    });
+
+    // Download the installer zip from the server
+    const downloadUrl = '/CyberSafe-Installer.zip';
+    
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'CyberSafe-Installer.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Track successful download
+    setTimeout(() => {
+        trackEvent({
+            eventType: 'download_completed',
+            userId: userId,
+            filename: 'CyberSafe-Installer.zip',
+            timestamp: new Date().toISOString()
+        });
+    }, 1000);
+}

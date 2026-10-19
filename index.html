@@ -21,9 +21,8 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#monitor">What to Monitor</a></li>
-                <li><a href="#stats">Stats</a></li>
-                <li><a href="#admin">Admin</a></li>
+                <li><a href="#monitor">Download</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -38,7 +37,7 @@
                 
                 <div class="cta-buttons">
                     <button class="btn btn-primary" onclick="scrollToDownload()">Download Now</button>
-                    <button class="btn btn-secondary" onclick="document.getElementById('monitor').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('download-section').scrollIntoView({behavior: 'smooth'})">Learn More</button>
                 </div>
 
                 <div class="hero-stats">
@@ -200,12 +199,41 @@
         </div>
     </section>
 
-    <!-- Admin Link Section -->
-    <section class="admin-section">
+    <!-- Download Section -->
+    <section class="download-section">
         <div class="container">
-            <h2>Admin Access</h2>
-            <p>Track downloads, active users, and system metrics</p>
-            <button class="btn btn-secondary" onclick="window.location.href='/admin'">Go to Admin Dashboard</button>
+            <h2>Download CyberSafe Now</h2>
+            <p class="download-intro">Get complete network monitoring in one click</p>
+            
+            <div class="download-options">
+                <div class="download-card">
+                    <div class="download-icon">📦</div>
+                    <h3>CyberSafe Installer</h3>
+                    <p>Complete package with all features</p>
+                    <p class="file-size">Zip Format • ~45 MB</p>
+                    <button class="btn btn-primary btn-large" onclick="downloadCyberSafe()">Download Now</button>
+                </div>
+            </div>
+
+            <div class="system-requirements">
+                <h3>System Requirements</h3>
+                <ul>
+                    <li>Windows 10 or later</li>
+                    <li>Python 3.9 or higher</li>
+                    <li>8 GB RAM (minimum)</li>
+                    <li>100 MB disk space</li>
+                </ul>
+            </div>
+
+            <div class="installation-guide">
+                <h3>Quick Installation</h3>
+                <ol>
+                    <li>Download and extract the zip file</li>
+                    <li>Run <code>install.bat</code></li>
+                    <li>Follow the installation wizard</li>
+                    <li>Start monitoring your network!</li>
+                </ol>
+            </div>
         </div>
     </section>
 
@@ -215,27 +243,28 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>CyberSafe</h4>
-                    <p>Network monitoring made simple</p>
+                    <p>Professional network monitoring made simple</p>
+                    <p class="version">v2.5.1</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Links</h4>
+                    <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#monitor">Download</a></li>
-                        <li><a href="#admin">Admin</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Legal</h4>
+                    <h4>Contact & Social</h4>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">License</a></li>
+                        <li>📧 Email: <a href="mailto:balacyber0107@gmail.com">balacyber0107@gmail.com</a></li>
+                        <li>💼 LinkedIn: <a href="https://www.linkedin.com/in/bala-b-e17" target="_blank">Bala B</a></li>
+                        <li>📂 GitHub: <a href="https://github.com/bala641/cybersafe" target="_blank">bala641/cybersafe</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 CyberSafe. All rights reserved. | <a href="https://github.com/bala641/cybersafe">Open Source on GitHub</a></p>
+                <p>&copy; 2024 CyberSafe. All rights reserved. | Developed by <a href="https://www.linkedin.com/in/bala-b-e17" target="_blank">Bala B</a> | <a href="https://github.com/bala641/cybersafe">Open Source on GitHub</a></p>
             </div>
         </div>
     </footer>
