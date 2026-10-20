@@ -69,9 +69,55 @@ function downloadCyberSafe() {
     }, 1000);
 }
 
+// Terminal animation effect
+function typeTerminalEffect() {
+    const terminal = document.querySelector('.terminal-body');
+    if (!terminal) return;
+
+    const lines = [
+        { text: '$ ./cybersafe', class: 'terminal-line' },
+        { text: 'initializing network monitor...', class: 'terminal-output' },
+        { text: '$ system status: ACTIVE', class: 'terminal-line' },
+        { text: '$ packets monitored: 1.2M+', class: 'terminal-line' },
+        { text: '$ threats detected: Real-time', class: 'terminal-line' },
+        { text: '$ active users: 50K+', class: 'terminal-line' },
+    ];
+
+    terminal.innerHTML = '';
+    let delay = 0;
+
+    lines.forEach((line, index) => {
+        setTimeout(() => {
+            const p = document.createElement('p');
+            p.className = line.class;
+            
+            if (line.class === 'terminal-line') {
+                const symbol = document.createElement('span');
+                symbol.className = 'command-symbol';
+                symbol.textContent = '$ ';
+                p.appendChild(symbol);
+                
+                const text = document.createTextNode(line.text.replace('$ ', ''));
+                p.appendChild(text);
+            } else if (line.class === 'terminal-output') {
+                p.textContent = line.text;
+            }
+            
+            p.style.opacity = '0';
+            p.style.animation = 'fadeIn 0.5s ease forwards';
+            terminal.appendChild(p);
+        }, delay);
+        
+        delay += 300;
+    });
+}
+
 // Handle form submission
 document.addEventListener('DOMContentLoaded', function() {
     initializeTracking();
+
+    // Initialize terminal effect
+    typeTerminalEffect();
 
     // Form submission handler
     const contactForm = document.querySelector('.contact-form');
@@ -89,16 +135,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Mobile menu handler
     const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
+    const navMenu = document.querySelector('.nav-menu');
     
-    if (hamburger && navLinks) {
+    if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
         });
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
-                navLinks.style.display = 'none';
+                navMenu.style.display = 'none';
             });
         });
     }
@@ -132,13 +178,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.feature-card, .info-item, .download-card').forEach(el => {
+    document.querySelectorAll('.feature-card, .info-item, .download-box').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+    
+    // Add fade-in animation for code blocks
+    document.querySelectorAll('.code-block').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'all 0.6s ease';
         observer.observe(el);
     });
 });
+
+// Add fade-in keyframe animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+`;
+document.head.appendChild(style);
 
 // Track user activity
 setInterval(function() {

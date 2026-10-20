@@ -5,61 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Message Sent - CyberSafe</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .success-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
-            padding: 20px;
-        }
-        
-        .success-card {
-            text-align: center;
-            background: var(--surface);
-            border: 2px solid var(--success);
-            border-radius: 16px;
-            padding: 3rem;
-            max-width: 500px;
-            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.2);
-        }
-        
-        .success-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            animation: bounce 1s ease-in-out;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .success-card h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--success);
-        }
-        
-        .success-card p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-        
-        .success-card a {
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
-    <div class="success-container">
-        <div class="success-card">
-            <div class="success-icon">✓</div>
-            <h1>Message Sent!</h1>
-            <p>Thank you for reaching out. We've received your message and will get back to you soon.</p>
-            <a href="/" class="btn btn-primary">Back to Home</a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="terminal-symbol">$</span>
+                <a href="index.html">cybersafe</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">home</a></li>
+                <li><a href="index.html#about" class="nav-link">about</a></li>
+                <li><a href="index.html#features" class="nav-link">features</a></li>
+                <li><a href="index.html#download" class="nav-link">download</a></li>
+                <li><a href="index.html#contact" class="nav-link">contact</a></li>
+            </ul>
         </div>
-    </div>
+    </nav>
+
+    <!-- Success Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="terminal-body" style="padding: 40px;">
+                        <p style="color: #00ff41; margin-bottom: 10px;">$ send_message.sh</p>
+                        <p style="color: #a0a0a0; margin-bottom: 10px;">Processing message...</p>
+                        <p style="color: #00ff41; margin-bottom: 10px;">$ echo "Message sent successfully"</p>
+                        <p style="color: #00ff41; font-size: 1.5rem; font-weight: bold; margin: 20px 0;">✓ SUCCESS</p>
+                        <p style="color: #a0a0a0; margin-bottom: 10px;">Thank you for reaching out!</p>
+                        <p style="color: #a0a0a0; margin-bottom: 20px;">Your message has been received and we'll get back to you soon.</p>
+                        <p style="color: #00d4ff; margin-bottom: 10px;">$ Redirecting in 5 seconds...</p>
+                        <div class="blinking">_</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-buttons" style="margin-top: 2rem;">
+                <a href="index.html#contact" class="btn btn-primary">Back to Contact</a>
+                <a href="index.html" class="btn btn-secondary">Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p><span class="terminal-symbol">$</span> echo "© 2024 CyberSafe by Bala B"</p>
+                <p>Made with <span class="heart">❤</span> | <a href="https://github.com/bala641">github.com/bala641</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Redirect to home after 5 seconds
+        setTimeout(function() {
+            window.location.href = 'index.html#contact';
+        }, 5000);
+
+        // Track submission
+        fetch('/api/track', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                eventType: 'contact_form_success',
+                userId: localStorage.getItem('cybersafe_user_id') || 'anonymous',
+                timestamp: new Date().toISOString()
+            })
+        }).catch(err => console.debug('Tracking unavailable'));
+    </script>
 </body>
 </html>

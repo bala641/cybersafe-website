@@ -3,27 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberSafe - Advanced Network Monitoring</title>
+    <title>CyberSafe - Network Monitoring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%233B82F6' width='100' height='100' rx='20'/><path fill='white' d='M50 20c-16.6 0-30 13.4-30 30s13.4 30 30 30 30-13.4 30-30-13.4-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z'/><circle cx='50' cy='50' r='8' fill='white'/></svg>">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="100" rx="20" fill="#3B82F6"/>
-                    <path d="M50 25C36 25 25 36 25 50C25 64 36 75 50 75C64 75 75 64 75 50C75 36 64 25 50 25ZM50 65C41 65 34 58 34 50C34 42 41 35 50 35C59 35 66 42 66 50C66 58 59 65 50 65Z" fill="white"/>
-                    <circle cx="50" cy="50" r="8" fill="white"/>
-                </svg>
-                <span>CyberSafe</span>
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="terminal-symbol">$</span>
+                <a href="#home">cybersafe</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">home</a></li>
+                <li><a href="#about" class="nav-link">about</a></li>
+                <li><a href="#features" class="nav-link">features</a></li>
+                <li><a href="#download" class="nav-link">download</a></li>
+                <li><a href="#contact" class="nav-link">contact</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -37,24 +34,59 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="gradient-text">Network Monitoring <span class="highlight">Evolved</span></h1>
-                <p class="hero-subtitle">Real-time packet capture, threat detection, and port monitoring in one powerful platform</p>
-                <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="downloadCyberSafe()">Download Now</button>
-                    <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="terminal-line"><span class="command-symbol">$</span> ./cybersafe</p>
+                        <p class="terminal-output">initializing network monitor...</p>
+                        <p class="terminal-line"><span class="command-symbol">$</span> system status: <span class="status-active">ACTIVE</span></p>
+                        <p class="terminal-line"><span class="command-symbol">$</span> packets monitored: <span class="status-number">1.2M+</span></p>
+                        <p class="terminal-line"><span class="command-symbol">$</span> threats detected: <span class="status-number">Real-time</span></p>
+                        <p class="terminal-line"><span class="command-symbol">$</span> active users: <span class="status-number">50K+</span></p>
+                        <p class="blinking">_</p>
+                    </div>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="floating-card">
-                    <div class="card-content">
-                        <div class="stat-item">
-                            <span class="stat-value">1.2M+</span>
-                            <span class="stat-label">Packets/Day</span>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="downloadCyberSafe()">Download Now</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <span class="terminal-symbol">$</span>
+                <h2>about cybersafe</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>CyberSafe is an advanced network monitoring platform designed for security professionals and network administrators. Built with performance and real-time analysis in mind.</p>
+                    <p>Monitor packets in real-time, detect threats instantly, and maintain complete visibility over your network infrastructure.</p>
+                    <div class="tech-stack">
+                        <h3>Technologies:</h3>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Packet Capture</span>
+                            <span class="tag">Real-time Analytics</span>
+                            <span class="tag">Threat Detection</span>
+                            <span class="tag">Network Security</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-value">50K+</span>
-                            <span class="stat-label">Users</span>
-                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="code-block">
+                        <p><span class="keyword">class</span> <span class="class-name">CyberSafe</span>:</p>
+                        <p>&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>():</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Network Monitor"</span></p>
+                        <p>&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">monitor</span>():</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Real-time packets"</span></p>
                     </div>
                 </div>
             </div>
@@ -64,39 +96,52 @@
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">Powerful Features</h2>
-            <p class="section-subtitle">Everything you need for complete network visibility</p>
-            
+            <div class="section-title">
+                <span class="terminal-symbol">$</span>
+                <h2>features</h2>
+            </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
                     <h3>Real-Time Monitoring</h3>
-                    <p>Live packet capture with instant threat detection and detailed protocol analysis</p>
+                    <p>Live packet capture with instant analysis and detailed protocol breakdown</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
                     <h3>Threat Detection</h3>
-                    <p>Advanced threat analysis with actionable insights and detailed reports</p>
+                    <p>Advanced threat analysis with AI-powered anomaly detection</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
                     <h3>Port Monitoring</h3>
-                    <p>Track open ports and network services across your infrastructure</p>
+                    <p>Track open ports and network services across infrastructure</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Beautiful Dashboards</h3>
-                    <p>Professional interface with gradient charts and real-time analytics</p>
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Comprehensive dashboards with real-time metrics and insights</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized performance with minimal resource usage</p>
+                    <div class="feature-icon">
+                        <i class="fas fa-zap"></i>
+                    </div>
+                    <h3>Performance</h3>
+                    <p>Optimized engine with minimal CPU and memory footprint</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📥</div>
-                    <h3>Easy Export</h3>
-                    <p>Export reports in JSON, PDF, Word, or plain text formats</p>
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Export</h3>
+                    <p>Export reports in JSON, PDF, Word, and text formats</p>
                 </div>
             </div>
         </div>
@@ -105,34 +150,37 @@
     <!-- Download Section -->
     <section id="download" class="download">
         <div class="container">
-            <h2 class="section-title">Get Started Now</h2>
-            <p class="section-subtitle">Download CyberSafe and start monitoring your network</p>
-            
-            <div class="download-card">
-                <div class="download-icon">📦</div>
-                <h3>CyberSafe Installer</h3>
-                <p>Complete package with all features included</p>
-                <p class="file-info">ZIP Format • ~45 MB • Windows 10+</p>
-                <button class="btn btn-primary btn-large" onclick="downloadCyberSafe()">Download Now</button>
-                
-                <div class="installation-steps">
-                    <h4>Quick Setup (3 Steps)</h4>
-                    <ol>
-                        <li>Extract the ZIP file</li>
-                        <li>Run <code>install.bat</code></li>
-                        <li>Follow the installation wizard</li>
-                    </ol>
+            <div class="section-title">
+                <span class="terminal-symbol">$</span>
+                <h2>get started</h2>
+            </div>
+            <div class="download-box">
+                <div class="download-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
                 </div>
-
-                <div class="system-requirements">
-                    <h4>System Requirements</h4>
-                    <ul>
-                        <li>✓ Windows 10 or later</li>
-                        <li>✓ Python 3.9+</li>
-                        <li>✓ 8 GB RAM</li>
-                        <li>✓ 100 MB disk space</li>
-                    </ul>
+                <div class="download-content">
+                    <p class="cmd"><span class="cmd-symbol">$</span> wget cybersafe-installer.zip</p>
+                    <p class="output">Downloading CyberSafe Installer...</p>
+                    <p class="output">[████████████████████] 100%</p>
+                    <p class="cmd"><span class="cmd-symbol">$</span> unzip cybersafe-installer.zip</p>
+                    <p class="output">Archive extracted successfully</p>
+                    <p class="cmd"><span class="cmd-symbol">$</span> ./install.bat</p>
+                    <p class="output">Installation complete!</p>
+                    <p class="cmd"><span class="cmd-symbol">$</span> cybersafe --gui</p>
+                    <p class="output status-active">CyberSafe launched successfully</p>
+                    <button class="btn btn-primary btn-large" onclick="downloadCyberSafe()">Download Installer (45 MB)</button>
                 </div>
+            </div>
+            <div class="system-requirements">
+                <h3>System Requirements</h3>
+                <ul>
+                    <li><span class="check">✓</span> Windows 10 or later</li>
+                    <li><span class="check">✓</span> Python 3.9+</li>
+                    <li><span class="check">✓</span> 8 GB RAM minimum</li>
+                    <li><span class="check">✓</span> 100 MB disk space</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -140,61 +188,44 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="section-subtitle">Questions or feedback? We'd love to hear from you!</p>
-            
+            <div class="section-title">
+                <span class="terminal-symbol">$</span>
+                <h2>let's talk</h2>
+            </div>
             <div class="contact-wrapper">
                 <div class="contact-info">
                     <div class="info-item">
-                        <span class="info-icon">📧</span>
-                        <div>
-                            <h4>Email</h4>
-                            <a href="mailto:balacyber0107@gmail.com">balacyber0107@gmail.com</a>
-                        </div>
+                        <h4>Email</h4>
+                        <a href="mailto:balacyber0107@gmail.com">balacyber0107@gmail.com</a>
                     </div>
                     <div class="info-item">
-                        <span class="info-icon">💼</span>
-                        <div>
-                            <h4>LinkedIn</h4>
-                            <a href="https://www.linkedin.com/in/bala-b-e17" target="_blank">Connect with me</a>
-                        </div>
+                        <h4>LinkedIn</h4>
+                        <a href="https://www.linkedin.com/in/bala-b-e17" target="_blank">Connect with me</a>
                     </div>
                     <div class="info-item">
-                        <span class="info-icon">🐙</span>
-                        <div>
-                            <h4>GitHub</h4>
-                            <a href="https://github.com/bala641/cybersafe" target="_blank">View source code</a>
-                        </div>
+                        <h4>GitHub</h4>
+                        <a href="https://github.com/bala641/cybersafe" target="_blank">View on GitHub</a>
                     </div>
                 </div>
-
                 <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
                     <input type="hidden" name="access_key" value="89fc3c6e-8c5a-46ee-a1c4-1a2b3c4d5e6f">
-                    <input type="hidden" name="subject" value="CyberSafe Website Contact">
-                    <input type="hidden" name="from_name" value="CyberSafe Contact Form">
-                    <input type="hidden" name="redirect" value="https://cybersafe-website.vercel.app/success.html">
+                    <input type="hidden" name="subject" value="CyberSafe Contact">
+                    <input type="hidden" name="from_name" value="CyberSafe">
+                    <input type="hidden" name="redirect" value="https://cybersafe-web-site.vercel.app/success.html">
 
                     <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
+                        <label>name</label>
+                        <input type="text" name="name" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
+                        <label>email</label>
+                        <input type="email" name="email" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="subject-msg">Subject *</label>
-                        <input type="text" id="subject-msg" name="subject_msg" required>
+                        <label>message</label>
+                        <textarea name="message" rows="5" required></textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
         </div>
@@ -204,29 +235,8 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h4>CyberSafe</h4>
-                    <p>Advanced network monitoring and threat detection platform</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#download">Download</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Developer</h4>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/bala-b-e17" target="_blank">LinkedIn</a></li>
-                        <li><a href="https://github.com/bala641" target="_blank">GitHub</a></li>
-                        <li><a href="mailto:balacyber0107@gmail.com">Email</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 CyberSafe. All rights reserved. | Developed by <a href="https://www.linkedin.com/in/bala-b-e17" target="_blank">Bala B</a></p>
+                <p><span class="terminal-symbol">$</span> echo "© 2024 CyberSafe by Bala B"</p>
+                <p>Made with <span class="heart">❤</span> | <a href="https://github.com/bala641">github.com/bala641</a></p>
             </div>
         </div>
     </footer>
