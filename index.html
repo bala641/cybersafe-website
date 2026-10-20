@@ -32,28 +32,60 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <div class="hero-badge">
+                    <span class="badge-icon">●</span> AVAILABLE FOR OPPORTUNITIES
+                </div>
+                <h1>CYBERSAFE</h1>
+                <h2>Network Monitoring Platform</h2>
+                <p class="hero-quote">"Securing today. Protecting tomorrow."</p>
+                <p class="hero-description">
+                    Advanced network monitoring and threat detection platform for cybersecurity professionals. 
+                    Real-time packet analysis, intelligent threat detection, and comprehensive network visibility.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="document.getElementById('download').scrollIntoView({behavior: 'smooth'})">Download Now</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Explore Features</button>
+                    <button class="btn btn-secondary" onclick="window.open('https://github.com/bala641/cybersafe', '_blank')">View on GitHub</button>
+                </div>
+                <div class="hero-links">
+                    <a href="https://www.linkedin.com/in/bala-b-e17" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/bala641" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:balacyber0107@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="hero-right">
                 <div class="terminal-window">
                     <div class="terminal-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
+                        <span class="terminal-title">kali@bala-portfolio: ~</span>
                     </div>
                     <div class="terminal-body">
-                        <p class="terminal-line"><span class="command-symbol">$</span> ./cybersafe</p>
-                        <p class="terminal-output">initializing network monitor...</p>
-                        <p class="terminal-line"><span class="command-symbol">$</span> system status: <span class="status-active">ACTIVE</span></p>
-                        <p class="terminal-line"><span class="command-symbol">$</span> packets monitored: <span class="status-number">1.2M+</span></p>
-                        <p class="terminal-line"><span class="command-symbol">$</span> threats detected: <span class="status-number">Real-time</span></p>
-                        <p class="terminal-line"><span class="command-symbol">$</span> active users: <span class="status-number">50K+</span></p>
-                        <p class="blinking">_</p>
+                        <p class="terminal-line"><span class="prompt">┌──(kali@cybersafe)-[~]</span></p>
+                        <p class="terminal-line"><span class="prompt">└─$</span> echo "Welcome to CyberSafe Network Monitor"</p>
+                        <p class="terminal-output">Welcome to CyberSafe Network Monitor</p>
+                        <p class="terminal-line">&nbsp;</p>
+                        <p class="terminal-line"><span class="prompt">┌──(kali@cybersafe)-[~]</span></p>
+                        <p class="terminal-line"><span class="prompt">└─$</span> neofetch</p>
+                        <p class="terminal-output">&nbsp;</p>
+                        <div class="neofetch-output">
+                            <p><span class="neofetch-label">Name</span>      : CyberSafe</p>
+                            <p><span class="neofetch-label">Version</span>   : 2024.10.20</p>
+                            <p><span class="neofetch-label">Type</span>      : Network Security Tool</p>
+                            <p><span class="neofetch-label">Focus</span>     : Packet Analysis · Threat Detection</p>
+                            <p><span class="neofetch-label">Platform</span>  : Windows 10+</p>
+                            <p><span class="neofetch-label">Language</span>  : Python 3.9+</p>
+                            <p><span class="neofetch-label">GUI</span>       : CustomTkinter</p>
+                            <p><span class="neofetch-label">Status</span>    : <span class="status-active">● ACTIVE - READY FOR DEPLOYMENT</span></p>
+                        </div>
+                        <p class="terminal-line">&nbsp;</p>
+                        <p class="terminal-line"><span class="prompt">┌──(kali@cybersafe)-[~]</span></p>
+                        <p class="terminal-line"><span class="prompt">└─$</span> <span class="blinking">█</span></p>
                     </div>
                 </div>
-            </div>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="downloadCyberSafe()">Download Now</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
             </div>
         </div>
     </section>
@@ -152,35 +184,155 @@
         <div class="container">
             <div class="section-title">
                 <span class="terminal-symbol">$</span>
-                <h2>get started</h2>
+                <h2>download</h2>
             </div>
-            <div class="download-box">
-                <div class="download-header">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
+            
+            <div class="download-grid">
+                <!-- Main Installer -->
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Windows Installer</h3>
+                    <p>Complete package with all dependencies</p>
+                    <p class="file-size">45 MB · ZIP Archive</p>
+                    <button class="btn btn-primary btn-large" onclick="downloadCyberSafe()">
+                        <i class="fas fa-download"></i> Download Installer
+                    </button>
+                    <div class="download-info">
+                        <p>Includes:</p>
+                        <ul>
+                            <li>✓ CyberSafe Desktop Application</li>
+                            <li>✓ Python Runtime & Dependencies</li>
+                            <li>✓ Installation Scripts</li>
+                            <li>✓ Quick Start Guide</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="download-content">
-                    <p class="cmd"><span class="cmd-symbol">$</span> wget cybersafe-installer.zip</p>
-                    <p class="output">Downloading CyberSafe Installer...</p>
-                    <p class="output">[████████████████████] 100%</p>
-                    <p class="cmd"><span class="cmd-symbol">$</span> unzip cybersafe-installer.zip</p>
-                    <p class="output">Archive extracted successfully</p>
-                    <p class="cmd"><span class="cmd-symbol">$</span> ./install.bat</p>
-                    <p class="output">Installation complete!</p>
-                    <p class="cmd"><span class="cmd-symbol">$</span> cybersafe --gui</p>
-                    <p class="output status-active">CyberSafe launched successfully</p>
-                    <button class="btn btn-primary btn-large" onclick="downloadCyberSafe()">Download Installer (45 MB)</button>
+
+                <!-- Source Code -->
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>Source Code</h3>
+                    <p>Clone from GitHub repository</p>
+                    <p class="file-size">Open Source · MIT License</p>
+                    <div class="code-snippet">
+                        <p><span class="prompt">$</span> git clone https://github.com/bala641/cybersafe.git</p>
+                        <p><span class="prompt">$</span> cd cybersafe</p>
+                        <p><span class="prompt">$</span> pip install -r requirements.txt</p>
+                        <p><span class="prompt">$</span> python gui/desktop_app.py</p>
+                    </div>
+                    <button class="btn btn-secondary btn-large" onclick="window.open('https://github.com/bala641/cybersafe', '_blank')">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </button>
+                </div>
+
+                <!-- Docker Image -->
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <h3>Docker Container</h3>
+                    <p>Run in isolated environment</p>
+                    <p class="file-size">Containerized · Cross-Platform</p>
+                    <div class="code-snippet">
+                        <p><span class="prompt">$</span> docker pull cybersafe/monitor:latest</p>
+                        <p><span class="prompt">$</span> docker run -d -p 5000:5000 cybersafe/monitor</p>
+                        <p><span class="prompt">$</span> # Access on localhost:5000</p>
+                    </div>
+                    <button class="btn btn-secondary btn-large" disabled>
+                        <i class="fab fa-docker"></i> Coming Soon
+                    </button>
+                </div>
+
+                <!-- Portable Version -->
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3>Portable Version</h3>
+                    <p>No installation required</p>
+                    <p class="file-size">38 MB · Standalone EXE</p>
+                    <div class="code-snippet">
+                        <p><span class="prompt">$</span> unzip cybersafe-portable.zip</p>
+                        <p><span class="prompt">$</span> cd cybersafe-portable</p>
+                        <p><span class="prompt">$</span> ./cybersafe.exe</p>
+                        <p class="terminal-output"># Run directly, no admin required</p>
+                    </div>
+                    <button class="btn btn-secondary btn-large" disabled>
+                        <i class="fas fa-download"></i> Coming Soon
+                    </button>
                 </div>
             </div>
+
+            <!-- Installation Terminal -->
+            <div class="installation-terminal">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="terminal-title">installation-guide.sh</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="terminal-line"><span class="prompt">┌──(kali@cybersafe)-[~]</span></p>
+                        <p class="terminal-line"><span class="prompt">└─$</span> wget cybersafe-web-site.vercel.app/CyberSafe-Installer.zip</p>
+                        <p class="terminal-output">--2024-10-20 12:00:00-- Resolving cybersafe-web-site.vercel.app...</p>
+                        <p class="terminal-output">Connecting to cybersafe-web-site.vercel.app... connected.</p>
+                        <p class="terminal-output">HTTP request sent, awaiting response... 200 OK</p>
+                        <p class="terminal-output">Length: 47185920 (45M) [application/zip]</p>
+                        <p class="terminal-output">Saving to: 'CyberSafe-Installer.zip'</p>
+                        <p class="terminal-output">&nbsp;</p>
+                        <p class="terminal-output">CyberSafe-Installer.zip [<span class="progress-bar">████████████████████</span>] 100% 15.2MB/s</p>
+                        <p class="terminal-output">&nbsp;</p>
+                        <p class="terminal-line"><span class="prompt">┌──(kali@cybersafe)-[~]</span></p>
+                        <p class="terminal-line"><span class="prompt">└─$</span> unzip CyberSafe-Installer.zip</p>
+                        <p class="terminal-output">Archive: CyberSafe-Installer.zip</p>
+                        <p class="terminal-output">&nbsp;&nbsp;inflating: install.bat</p>
+                        <p class="terminal-output">&nbsp;&nbsp;inflating: requirements.txt</p>
+                        <p class="terminal-output">&nbsp;&nbsp;extracting: gui/desktop_app.py</p>
+                        <p class="terminal-output status-active">✓ Extraction complete!</p>
+                        <p class="terminal-output">&nbsp;</p>
+                        <p class="terminal-line"><span class="prompt">┌──(kali@cybersafe)-[~]</span></p>
+                        <p class="terminal-line"><span class="prompt">└─$</span> ./install.bat</p>
+                        <p class="terminal-output">Installing Python dependencies...</p>
+                        <p class="terminal-output">Installing CustomTkinter... <span class="status-active">✓</span></p>
+                        <p class="terminal-output">Installing Scapy... <span class="status-active">✓</span></p>
+                        <p class="terminal-output">Installing Matplotlib... <span class="status-active">✓</span></p>
+                        <p class="terminal-output status-active">✓ Installation complete!</p>
+                        <p class="terminal-output">&nbsp;</p>
+                        <p class="terminal-line"><span class="prompt">┌──(kali@cybersafe)-[~]</span></p>
+                        <p class="terminal-line"><span class="prompt">└─$</span> python gui/desktop_app.py</p>
+                        <p class="terminal-output status-active">● CyberSafe Network Monitor launched successfully</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Requirements -->
             <div class="system-requirements">
-                <h3>System Requirements</h3>
-                <ul>
-                    <li><span class="check">✓</span> Windows 10 or later</li>
-                    <li><span class="check">✓</span> Python 3.9+</li>
-                    <li><span class="check">✓</span> 8 GB RAM minimum</li>
-                    <li><span class="check">✓</span> 100 MB disk space</li>
-                </ul>
+                <h3><span class="terminal-symbol">$</span> System Requirements</h3>
+                <div class="requirements-grid">
+                    <div class="req-card">
+                        <h4>Minimum</h4>
+                        <ul>
+                            <li><span class="check">✓</span> Windows 10 (64-bit)</li>
+                            <li><span class="check">✓</span> Python 3.9+</li>
+                            <li><span class="check">✓</span> 4 GB RAM</li>
+                            <li><span class="check">✓</span> 100 MB disk space</li>
+                        </ul>
+                    </div>
+                    <div class="req-card">
+                        <h4>Recommended</h4>
+                        <ul>
+                            <li><span class="check">✓</span> Windows 11 (64-bit)</li>
+                            <li><span class="check">✓</span> Python 3.11+</li>
+                            <li><span class="check">✓</span> 8 GB RAM</li>
+                            <li><span class="check">✓</span> 500 MB disk space</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
