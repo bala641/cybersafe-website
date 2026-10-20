@@ -1,4 +1,4 @@
-// Track page views and generate unique user ID
+// Initialize tracking
 function initializeTracking() {
     let userId = localStorage.getItem('cybersafe_user_id');
     
@@ -7,7 +7,6 @@ function initializeTracking() {
         localStorage.setItem('cybersafe_user_id', userId);
     }
 
-    // Track page view
     trackEvent({
         eventType: 'page_view',
         userId: userId,
@@ -18,30 +17,8 @@ function initializeTracking() {
     });
 }
 
-// Track download click
-function downloadApp() {
-    const userId = localStorage.getItem('cybersafe_user_id') || 'anonymous';
-    
-    trackEvent({
-        eventType: 'download',
-        userId: userId,
-        downloadUrl: '/downloads/cybersafe-latest.exe',
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent
-    });
-
-    // Trigger download
-    const link = document.createElement('a');
-    link.href = 'https://github.com/bala641/cybersafe/releases/download/latest/cybersafe-latest.exe';
-    link.download = 'CyberSafe-Installer.exe';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-// Send tracking data to backend
+// Track events
 function trackEvent(data) {
-    // Try to send to backend API
     fetch('/api/track', {
         method: 'POST',
         headers: {
@@ -49,65 +26,84 @@ function trackEvent(data) {
         },
         body: JSON.stringify(data)
     }).catch(err => {
-        // Silently fail if no backend (static hosting)
-        console.debug('Tracking data stored locally');
+        console.debug('Tracking unavailable');
         storeLocalTracking(data);
     });
 }
 
-// Store tracking data locally if backend unavailable
 function storeLocalTracking(data) {
     let events = JSON.parse(localStorage.getItem('cybersafe_events') || '[]');
     events.push(data);
-    // Keep only last 100 events
     if (events.length > 100) {
         events = events.slice(-100);
     }
     localStorage.setItem('cybersafe_events', JSON.stringify(events));
 }
 
-// Export tracking data (for development/testing)
-function exportTrackingData() {
-    const events = JSON.parse(localStorage.getItem('cybersafe_events') || '[]');
-    const userId = localStorage.getItem('cybersafe_user_id');
+// Download CyberSafe
+function downloadCyberSafe() {
+    const userId = localStorage.getItem('cybersafe_user_id') || 'anonymous';
     
-    const data = {
+    trackEvent({
+        eventType: 'download_initiated',
         userId: userId,
-        events: events,
-        exportedAt: new Date().toISOString()
-    };
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent
+    });
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `cybersafe-tracking-${Date.now()}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const downloadUrl = '/CyberSafe-Installer.zip';
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'CyberSafe-Installer.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(() => {
+        trackEvent({
+            eventType: 'download_completed',
+            userId: userId,
+            filename: 'CyberSafe-Installer.zip',
+            timestamp: new Date().toISOString()
+        });
+    }, 1000);
 }
 
-// Scroll to download section
-function scrollToDownload() {
-    const downloadSection = document.querySelector('.download-section');
-    if (downloadSection) {
-        downloadSection.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
-// Initialize on page load
+// Handle form submission
 document.addEventListener('DOMContentLoaded', function() {
     initializeTracking();
 
-    // Update year in footer
-    const currentYear = new Date().getFullYear();
-    const footerYear = document.querySelector('.footer-bottom');
-    if (footerYear) {
-        footerYear.innerHTML = footerYear.innerHTML.replace('2024', currentYear);
+    // Form submission handler
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            const userId = localStorage.getItem('cybersafe_user_id') || 'anonymous';
+            
+            trackEvent({
+                eventType: 'contact_form_submitted',
+                userId: userId,
+                timestamp: new Date().toISOString()
+            });
+        });
     }
 
-    // Smooth scroll for all anchor links
+    // Mobile menu handler
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.style.display = 'none';
+            });
+        });
+    }
+
+    // Smooth scroll for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -121,28 +117,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Monitor checkbox changes
-    document.querySelectorAll('.monitor-item input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            trackEvent({
-                eventType: 'feature_selection',
-                userId: localStorage.getItem('cybersafe_user_id'),
-                feature: this.nextElementSibling.textContent,
-                selected: this.checked,
-                timestamp: new Date().toISOString()
-            });
+    // Add animation classes on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
         });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .info-item, .download-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
     });
 });
 
-// Keyboard shortcut for admin access (Ctrl+Shift+A)
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-        window.location.href = '/admin';
-    }
-});
-
-// Periodic ping to track active users (every 5 minutes)
+// Track user activity
 setInterval(function() {
     const userId = localStorage.getItem('cybersafe_user_id');
     if (document.hasFocus()) {
@@ -154,46 +152,12 @@ setInterval(function() {
     }
 }, 5 * 60 * 1000);
 
-// Track when user leaves
+// Track session end
 window.addEventListener('beforeunload', function() {
     const userId = localStorage.getItem('cybersafe_user_id');
     trackEvent({
         eventType: 'session_end',
         userId: userId,
-        timestamp: new Date().toISOString(),
-        sessionDuration: performance.timing.loadEventEnd - performance.timing.navigationStart
+        timestamp: new Date().toISOString()
     });
 });
-
-
-// Download CyberSafe installer
-function downloadCyberSafe() {
-    const userId = localStorage.getItem('cybersafe_user_id') || 'anonymous';
-    
-    trackEvent({
-        eventType: 'download_initiated',
-        userId: userId,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent
-    });
-
-    // Download the installer zip from the server
-    const downloadUrl = '/CyberSafe-Installer.zip';
-    
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = 'CyberSafe-Installer.zip';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // Track successful download
-    setTimeout(() => {
-        trackEvent({
-            eventType: 'download_completed',
-            userId: userId,
-            filename: 'CyberSafe-Installer.zip',
-            timestamp: new Date().toISOString()
-        });
-    }, 1000);
-}
