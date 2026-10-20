@@ -4,7 +4,7 @@
   "description": "CyberSafe Network Monitoring - Professional Marketing Website",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'Static site - no build needed'",
+    "build": "mkdir -p public && cp index.html admin.html style.css script.js requirements.txt CyberSafe-Installer.zip public/ 2>/dev/null; cp -r api public/ 2>/dev/null; exit 0",
     "dev": "python -m http.server 3000",
     "start": "npm run dev"
   },
