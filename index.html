@@ -231,41 +231,76 @@
                     </button>
                 </div>
 
-                <!-- Docker -->
-                <div class="download-card">
-                    <div class="download-icon"><i class="fab fa-docker"></i></div>
-                    <h3>Docker</h3>
-                    <p>Containerized deployment</p>
-                    <p class="file-size">Cross-Platform · Isolated</p>
-                    <div class="code-snippet">
-                        <p><span class="prompt">$</span> docker pull cybersafe/monitor</p>
-                        <p><span class="prompt">$</span> docker run -d \</p>
-                        <p>&nbsp;&nbsp;-p 5000:5000 \</p>
-                        <p>&nbsp;&nbsp;cybersafe/monitor</p>
+                <!-- Android -->
+                <div class="download-card mobile-card">
+                    <div class="mobile-coming-soon-badge">COMING SOON</div>
+                    <div class="download-icon mobile-icon"><i class="fab fa-android"></i></div>
+                    <h3>Android App</h3>
+                    <p>Monitor your network from your phone</p>
+                    <p class="file-size">Android 8.0+ · Free</p>
+                    <div class="mobile-features">
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Live traffic dashboard</div>
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Real-time threat alerts</div>
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Connect to desktop agent</div>
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Push notifications</div>
                     </div>
-                    <button class="btn btn-secondary btn-large" disabled>
-                        <i class="fab fa-docker"></i>&nbsp; Coming Soon
+                    <div class="notify-form" id="androidNotifyForm">
+                        <p class="notify-label">Get notified when it launches:</p>
+                        <div class="notify-input-row">
+                            <input type="email" id="notifyEmail" placeholder="your@email.com" class="notify-input">
+                            <button class="btn btn-primary notify-btn" onclick="submitNotify()">
+                                <i class="fas fa-bell"></i> Notify Me
+                            </button>
+                        </div>
+                    </div>
+                    <div id="notifySuccess" class="notify-success" style="display:none;">
+                        <i class="fas fa-check-circle"></i> You're on the list! We'll email you at launch.
+                    </div>
+                </div>
+
+                <!-- iOS -->
+                <div class="download-card mobile-card">
+                    <div class="mobile-coming-soon-badge">COMING SOON</div>
+                    <div class="download-icon mobile-icon ios-icon"><i class="fab fa-apple"></i></div>
+                    <h3>iOS App</h3>
+                    <p>CyberSafe for iPhone &amp; iPad</p>
+                    <p class="file-size">iOS 14+ · Free</p>
+                    <div class="mobile-features">
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Network scanner</div>
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Connected devices map</div>
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Sync with desktop</div>
+                        <div class="mobile-feature-item"><i class="fas fa-check"></i> Security reports</div>
+                    </div>
+                    <button class="btn btn-secondary btn-large" disabled style="margin-top:auto">
+                        <i class="fab fa-apple"></i>&nbsp; Coming Soon
                     </button>
                 </div>
 
-                <!-- Portable -->
-                <div class="download-card">
-                    <div class="download-icon"><i class="fas fa-box-open"></i></div>
-                    <h3>Portable EXE</h3>
-                    <p>No installation required</p>
-                    <p class="file-size">Standalone · No Admin Needed</p>
-                    <div class="code-snippet">
-                        <p><span class="prompt">$</span> # No install needed</p>
-                        <p><span class="prompt">$</span> # Double-click to run</p>
-                        <p><span class="prompt">$</span> ./CyberSafe.exe</p>
-                        <p>&nbsp;</p>
-                        <p><span class="prompt">$</span> # Fully self-contained</p>
-                    </div>
-                    <button class="btn btn-secondary btn-large" disabled>
-                        <i class="fas fa-download"></i>&nbsp; Coming Soon
-                    </button>
-                </div>
+            </div>
 
+            <!-- Platform availability strip -->
+            <div class="platform-strip">
+                <span class="platform-strip-label">Available on:</span>
+                <div class="platform-item">
+                    <i class="fab fa-windows"></i>
+                    <span>Windows</span>
+                    <span class="ready">● Live</span>
+                </div>
+                <div class="platform-item">
+                    <i class="fab fa-android"></i>
+                    <span>Android</span>
+                    <span class="soon">Coming Soon</span>
+                </div>
+                <div class="platform-item">
+                    <i class="fab fa-apple"></i>
+                    <span>iOS</span>
+                    <span class="soon">Coming Soon</span>
+                </div>
+                <div class="platform-item">
+                    <i class="fab fa-linux"></i>
+                    <span>Linux</span>
+                    <span class="soon">Coming Soon</span>
+                </div>
             </div>
 
             <!-- Installation Terminal -->

@@ -229,3 +229,42 @@ window.addEventListener('beforeunload', function() {
         timestamp: new Date().toISOString()
     });
 });
+
+// ── Mobile notify form ────────────────────────────────────────────────────
+function submitNotify() {
+    const input   = document.getElementById('notifyEmail');
+    const form    = document.getElementById('androidNotifyForm');
+    const success = document.getElementById('notifySuccess');
+    const email   = input ? input.value.trim() : '';
+
+    if (!email || !email.includes('@')) {
+        if (input) {
+            input.style.borderColor = '#f85149';
+            input.focus();
+            setTimeout(() => { input.style.borderColor = ''; }, 2000);
+        }
+        return;
+    }
+
+    // Send via Web3Forms (same access key)
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            access_key: 'c936415e-01ea-4c06-9171-0693bb16f363',
+            subject: 'CyberSafe Android Launch Notification Request',
+            from_name: 'CyberSafe Website',
+            email: email,
+            message: email + ' wants to be notified when the Android app launches.'
+        })
+    })
+    .then(() => {
+        if (form)    form.style.display    = 'none';
+        if (success) success.style.display = 'block';
+    })
+    .catch(() => {
+        // Still show success — we don't want to block the UX
+        if (form)    form.style.display    = 'none';
+        if (success) success.style.display = 'block';
+    });
+}
